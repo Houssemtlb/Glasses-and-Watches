@@ -1,0 +1,56 @@
+"use client"
+
+import { useState, useMemo, useEffect, Suspense } from "react"
+
+
+
+import { ProductCardSkeleton } from "@/components/ProductCard"
+import { getAvailableGlassesBrands, getGlasses, getGlassesImages } from "@/lib/products"
+import { FilterList, imagesType, productType } from "../_components/FilterList"
+
+
+export default function GlassesPage() {
+  return (
+    <>
+        <Suspense
+          fallback={
+            <div className="ml-60">
+              <div className="grid lg:grid-cols-3 gap-4">
+                <ProductCardSkeleton />
+                <ProductCardSkeleton />
+                <ProductCardSkeleton />
+                <ProductCardSkeleton />
+                <ProductCardSkeleton />
+                <ProductCardSkeleton />
+              </div>
+            </div>
+          }
+        >
+          <GlassesPageComponent />
+        </Suspense>
+    </>
+  )
+}
+
+async function GlassesPageComponent() {
+  const [products, setProducts] = useState<productType[]>([])
+  const [images, setImages] = useState<imagesType[]>([])
+  const [brands, setBrands] = useState<string[]>([])
+
+  useEffect(() => {
+    async function fetchData() {
+      const products = await getGlasses()
+      const images = await getGlassesImages()
+      const brands = await getAvailableGlassesBrands()
+      setProducts(products)
+      setImages(images)
+      setBrands(brands)
+    }
+    fetchData()
+  }, [])
+
+  return (
+        <FilterList products={products} images={images} brands={brands} />
+  )
+}
+
