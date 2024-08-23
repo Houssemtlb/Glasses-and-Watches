@@ -5,12 +5,23 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { formatCurrency } from "@/lib/formatters"
 import { useState } from "react"
 import { addProduct, updateProduct } from "../../_actions/products"
 import { useFormState, useFormStatus } from "react-dom"
 import { Product } from "@prisma/client"
-import Image from "next/image"
+import { Colors, Categories, Types } from '@/lib/enums'; // Adjust the import path as necessary
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+const colorOptions = Object.values(Colors);
+const categoryOptions = Object.values(Categories);
+const typeOptions = Object.values(Types);
 
 export function ProductForm({ product }: { product?: Product | null }) {
     const [error, action] = useFormState(
@@ -37,14 +48,19 @@ export function ProductForm({ product }: { product?: Product | null }) {
         {error.name && <div className="text-destructive">{error.name}</div>}
       </div>
       <div className="space-y-2">
-        <Label htmlFor="type">Type</Label>
-        <Input
-          type="text"
-          id="type"
-          name="type"
-          required
-          defaultValue={product?.type}
-        />
+      <Label htmlFor="type">Type</Label>
+      <Select name="type" required defaultValue={product?.type || ""}>
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder="Type" />
+        </SelectTrigger>
+        <SelectContent>
+          {typeOptions.map((type) => (
+            <SelectItem key={type} value={type}>
+              {type}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
         {error.type && <div className="text-destructive">{error.type}</div>}
       </div>
       <div className="space-y-2">
@@ -59,17 +75,51 @@ export function ProductForm({ product }: { product?: Product | null }) {
         {error.brand && <div className="text-destructive">{error.brand}</div>}
       </div>
       <div className="space-y-2">
-        <Label htmlFor="category">Category</Label>
-        <Input
-          type="text"
-          id="category"
-          name="category"
-          required
-          defaultValue={product?.category}
-        />
+      <Label htmlFor="category">Category</Label>
+      <Select name="category" required defaultValue={product?.category || ""}>
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder="Category" />
+        </SelectTrigger>
+        <SelectContent>
+          {categoryOptions.map((category) => (
+            <SelectItem key={category} value={category}>
+              {category}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
         {error.category && (
           <div className="text-destructive">{error.category}</div>
         )}
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="color">Color</Label>
+        <Select name="color" required defaultValue={product?.color || ""}>
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder="Color" />
+        </SelectTrigger>
+        <SelectContent>
+          {colorOptions.map((color) => (
+            <>
+              <SelectSeparator />
+              <SelectItem key={color} value={color}>
+                {color}
+              </SelectItem>
+            </>
+          ))}
+        </SelectContent>
+      </Select>
+        {error.brand && <div className="text-destructive">{error.brand}</div>}
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="dimensions">Dimensions</Label>
+        <Input
+          type="text"
+          id="dimensions"
+          name="dimensions"
+          defaultValue={product?.dimensions ? product?.dimensions : ""}
+        />
+        {error.dimensions && <div className="text-destructive">{error.dimensions}</div>}
       </div>
       <div className="space-y-2">
         <Label htmlFor="price">Price In Cents</Label>
@@ -92,6 +142,8 @@ export function ProductForm({ product }: { product?: Product | null }) {
           name="description"
           required
           defaultValue={product?.description}
+          minLength={50}
+          maxLength={85}
         />
         {error.description && (
           <div className="text-destructive">{error.description}</div>

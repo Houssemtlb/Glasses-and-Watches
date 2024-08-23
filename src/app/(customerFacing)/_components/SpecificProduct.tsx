@@ -19,6 +19,8 @@ export async function SpecificProduct({id}:{id: string}) {
             description={props.description}
             type={props.type}
             brand={props.brand}
+            color={props.color}
+            dimensions={props.dimensions}
             category={props.category}
             images={props.images}
         />

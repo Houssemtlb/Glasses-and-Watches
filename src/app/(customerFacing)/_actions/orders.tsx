@@ -2,10 +2,7 @@
 
 import db from "@/db/db"
 import { z } from "zod"
-import fs from "fs/promises"
-import { notFound, redirect } from "next/navigation"
-import { revalidatePath } from "next/cache"
-import path from "path"
+import { redirect } from "next/navigation"
 
 
   const addOrder = z.object({
@@ -89,8 +86,6 @@ export async function makeOrder(id:string, price: number,qtt:number, prevState: 
     },
   })
 
-  revalidatePath("/")
-  revalidatePath("/products")
-
-  redirect("/products")
+  var product = await db.product.findUnique({ where: { id } });
+  product?.type === "Lunettes" ? redirect("/glasses") : redirect("/watches")
 }

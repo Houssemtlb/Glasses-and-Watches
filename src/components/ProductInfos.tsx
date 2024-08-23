@@ -18,6 +18,8 @@ type ProductCardProps = {
     type: string
     brand: string
     category: string
+    color: string
+    dimensions: string | null
     images: { id: string; path: string }[]
   }
 
@@ -28,6 +30,8 @@ export default async function ProductInfos({
     description,
     type,
     brand,
+    color,
+    dimensions,
     category,
     images,
   }: ProductCardProps) {
@@ -90,13 +94,22 @@ export default async function ProductInfos({
             <span className="text-base font-medium">Category:</span>
             <span className="text-muted-foreground">{category}</span>
           </div>
+          <div className="flex items-center gap-2">
+            <span className="text-base font-medium">Color:</span>
+            <span className="text-muted-foreground">{color}</span>
+          </div>
+          {dimensions && 
+            <div className="flex items-center gap-2">
+              <span className="text-base font-medium">Dimensions:</span>
+              <span className="text-muted-foreground">{dimensions}</span>
+            </div>}
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full justify-center md:justify-start">
         <Dialog>
             <DialogTrigger asChild><Button size="lg" >Order Now</Button></DialogTrigger>
-            <DialogContent>
+            <DialogContent className="w-10/12 sm:max-w-md rounded-md" onOpenAutoFocus={e=>e.preventDefault()}>
                 <DialogHeader>
-                    <DialogDescription>
+                    <DialogDescription >
                         <PurchaseForm id={id} price={price}/>
                     </DialogDescription>
                 </DialogHeader>

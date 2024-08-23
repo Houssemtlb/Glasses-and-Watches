@@ -27,65 +27,72 @@ export function PurchaseForm({id,price}: {id : string,price:number}) {
       <div className="space-y-2">
         <Label htmlFor="firstName">First Name</Label>
         <Input
+          autoFocus
           type="text"
           id="firstName"
           name="firstName"
           required
         />
-        {error.firstName && <div className="text-destructive">{error.firstName}</div>}
+        {error?.firstName && <div className="text-destructive">{error.firstName}</div>}
       </div>
       <div className="space-y-2">
         <Label htmlFor="lastName">Last Name</Label>
         <Input
+          autoFocus
           type="text"
           id="lastName"
           name="lastName"
           required
         />
-        {error.lastName && <div className="text-destructive">{error.lastName}</div>}
+        {error?.lastName && <div className="text-destructive">{error.lastName}</div>}
       </div>
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
         <Input
+          autoFocus
           type="email"
           id="email"
           name="email"
           required
         />
-        {error.email && <div className="text-destructive">{error.email}</div>}
+        {error?.email && <div className="text-destructive">{error.email}</div>}
       </div>
       <div className="space-y-2">
         <Label htmlFor="phone">Phone</Label>
         <Input
+          autoFocus
           type="tel"
           id="phone"
           name="phone"
           required
         />
-        {error.phone && <div className="text-destructive">{error.phone}</div>}
+        {error?.phone && <div className="text-destructive">{error.phone}</div>}
       </div>
       <div className="space-y-2">
         <Label htmlFor="wilaaya">Wilaaya</Label>
         <Input
+          autoFocus
           type="text"
           id="wilaaya"
           name="wilaaya"
           required
         />
-        {error.wilaaya && <div className="text-destructive">{error.wilaaya}</div>}
+        {error?.wilaaya && <div className="text-destructive">{error.wilaaya}</div>}
       </div>
       <div className="space-y-2">
         <Label htmlFor="address">Address</Label>
         <Textarea
+          autoFocus
           id="address"
           name="address"
           required
         />
-        {error.address && <div className="text-destructive">{error.address}</div>}
+        {error?.address && <div className="text-destructive">{error.address}</div>}
       </div>
       <div className="space-y-2">
         <Label htmlFor="quantity">Quantity</Label>
         <Input
+          autoFocus
           type="number"
           id="quantity"
           name="quantity"
@@ -94,9 +101,11 @@ export function PurchaseForm({id,price}: {id : string,price:number}) {
           }}
           required
         />
-        {error.quantity && <div className="text-destructive">{error.quantity}</div>}
+        {error?.quantity && <div className="text-destructive">{error.quantity}</div>}
       </div>
-      <SubmitButton />
+      <div className="flex w-full justify-center py-2">
+        <SubmitButton />
+      </div>
     </form>
   )
 }
@@ -112,7 +121,7 @@ function SubmitButton() {
         description: "Our team members will contact you shortly to confirm your order.",
       })
     }}>
-      {pending ? "Saving..." : "Save"}
+      {pending ? "Saving..." : "Order"}
     </Button>
   )
 }

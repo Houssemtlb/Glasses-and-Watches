@@ -10,11 +10,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
 model Product {
   id                     String                 @id @default(uuid())
   name                   String
   price                  Int
   description            String
+  color                  String
+  dimensions             String?              
   type                   String
   brand                  String
   category               String
@@ -25,6 +28,7 @@ model Product {
   images                 Image[]                
   orders                 Order[]
 }
+
 
 
 model Image {

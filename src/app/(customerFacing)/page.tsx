@@ -8,34 +8,61 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { Suspense } from "react"
 
-const getMostPopularProducts = cache(
+const getMostPopularWatches = cache(
   () => {
     return db.product.findMany({
-      where: { isAvailableForPurchase: true },
+      where: { isAvailableForPurchase: true, type: "Montre" },
       orderBy: { orders: { _count: "desc" } },
-      take: 6,
+      take: 4,
     })
   },
-  ["/", "getMostPopularProducts"],
+  ["/", "getMostPopularWatches"],
   { revalidate: 60 * 60 * 24 }
 )
 
-const getNewestProducts = cache(() => {
+const getNewestWatches = cache(() => {
   return db.product.findMany({
-    where: { isAvailableForPurchase: true },
+    where: { isAvailableForPurchase: true, type: "Montre" },
     orderBy: { createdAt: "desc" },
-    take: 6,
+    take: 4,
   })
-}, ["/", "getNewestProducts"])
+}, ["/", "getNewestWatches"])
+
+const getMostPopularGlasses = cache(
+  () => {
+    return db.product.findMany({
+      where: { isAvailableForPurchase: true, type: "Lunettes" },
+      orderBy: { orders: { _count: "desc" } },
+      take: 4,
+    })
+  },
+  ["/", "getMostPopularGlasses"],
+  { revalidate: 60 * 60 * 24 }
+)
+
+const getNewestGlasses = cache(() => {
+  return db.product.findMany({
+    where: { isAvailableForPurchase: true, type: "Lunettes" },
+    orderBy: { createdAt: "desc" },
+    take: 4,
+  })
+}, ["/", "getNewestGlassess"])
 
 export default function HomePage() {
   return (
     <main className="space-y-12">
       <ProductGridSection
-        title="Most Popular"
-        productsFetcher={getMostPopularProducts}
+        title="Most Popular Glasses"
+        productsFetcher={getMostPopularGlasses}
+        direction="glasses"
       />
-      <ProductGridSection title="Newest" productsFetcher={getNewestProducts} />
+      <ProductGridSection title="Newest Glasses" productsFetcher={getNewestGlasses} direction="glasses"/>
+      <ProductGridSection
+        title="Most Popular Watches"
+        productsFetcher={getMostPopularWatches}
+        direction="watches"
+      />
+      <ProductGridSection title="Newest Watches" productsFetcher={getNewestWatches} direction="watches"/>
     </main>
   )
 }
@@ -43,18 +70,20 @@ export default function HomePage() {
 type ProductGridSectionProps = {
   title: string
   productsFetcher: () => Promise<Product[]>
+  direction : string
 }
 
 function ProductGridSection({
   productsFetcher,
   title,
+  direction
 }: ProductGridSectionProps) {
   return (
     <div className="space-y-4">
       <div className="flex gap-4">
         <h2 className="text-3xl font-bold">{title}</h2>
         <Button variant="outline" asChild>
-          <Link href="/products" className="space-x-2">
+          <Link href={`/${direction}`} className="space-x-2">
             <span>View All</span>
             <ArrowRight className="size-4" />
           </Link>

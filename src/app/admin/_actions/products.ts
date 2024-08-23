@@ -17,6 +17,8 @@ const addSchema = z.object({
   name: z.string().min(1),
   price: z.coerce.number().min(0).max(100_000_000),
   description: z.string().min(1),
+  color: z.string().min(1),
+  dimensions: z.string().min(0).optional(),
   type: z.string().min(1),
   brand: z.string().min(1),
   category: z.string().min(1),
@@ -29,6 +31,8 @@ const updateSchema = z.object({
   description: z.string().min(1),
   type: z.string().min(1),
   brand: z.string().min(1),
+  color: z.string().min(1),
+  dimensions: z.string().min(0).optional(),
   category: z.string().min(1),
   images: z.array(imageSchema).optional(),
 })
@@ -39,6 +43,8 @@ export async function addProduct(prevState: unknown, formData: FormData) {
   const price = formData.get('price');
   const description = formData.get('description');
   const type = formData.get('type');
+  const color = formData.get('color');
+  const dimensions = formData.get('dimensions');
   const brand = formData.get('brand');
   const category = formData.get('category');
   const images = formData.getAll('images');
@@ -49,6 +55,8 @@ export async function addProduct(prevState: unknown, formData: FormData) {
     price,
     description,
     type,
+    color,
+    dimensions,
     brand,
     category,
     images,
@@ -88,6 +96,8 @@ export async function addProduct(prevState: unknown, formData: FormData) {
       type: data.type,
       brand: data.brand,
       category: data.category,
+      color: data.color,
+      dimensions: data.dimensions,
       images: { create: imagePaths },
     },
   })
@@ -122,6 +132,8 @@ export async function updateProduct(
       price: data.price,
       type: data.type,
       brand: data.brand,
+      color: data.color,
+      dimensions: data.dimensions,
       category: data.category,
     },
   })

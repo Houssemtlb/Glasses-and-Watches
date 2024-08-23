@@ -14,8 +14,8 @@ export default function GlassesPage() {
     <>
         <Suspense
           fallback={
-            <div className="ml-60">
-              <div className="grid lg:grid-cols-3 gap-4">
+            <div className="md:ml-60 sm:ml-0">
+              <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-4">
                 <ProductCardSkeleton />
                 <ProductCardSkeleton />
                 <ProductCardSkeleton />

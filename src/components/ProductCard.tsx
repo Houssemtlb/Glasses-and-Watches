@@ -90,7 +90,7 @@ export function ProductCard({
       <CardContent className="p-4 space-y-2">
         <h3 className="text-xl font-bold">{name}</h3>
         <p className="text-muted-foreground">
-          Introducing the Acme Prism T-Shirt, a perfect blend of style and comfort for the modern individual.
+          {description}
         </p>
         <div className="flex items-center justify-between">
           <div className="text-2xl font-bold">{price}</div>

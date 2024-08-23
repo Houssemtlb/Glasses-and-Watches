@@ -5,6 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
+import { Categories, Colors } from "@/lib/enums"
 import { useMemo, useState } from "react"
 
 
@@ -15,7 +16,9 @@ export type productType = {
     type: string,
     brand: string,
     category: string,
-    price: number
+    price: number,
+    color: string,
+    dimensions: string | null
   }
   
   export type imagesType = {
@@ -29,9 +32,14 @@ export type productType = {
 
 
 export function FilterList({ products, images, brands }: { products: productType[], images: imagesType[], brands : string[] }) {
-    const [selectedFilters, setSelectedFilters] = useState<{ category: string[],brand : string[] }>({
+
+    const colorOptions = Object.values(Colors);
+    const categoryOptions  = Object.values(Categories)
+
+    const [selectedFilters, setSelectedFilters] = useState<{ category: string[],brand : string[],color: string[] }>({
       category: [],
       brand: [],
+      color: [],
     })
   
     const handleFilterChange = (type: string, value: string) => {
@@ -49,7 +57,15 @@ export function FilterList({ products, images, brands }: { products: productType
             ? selectedFilters.brand.filter((item) => item !== value)
             : [...selectedFilters.brand, value],
         })
+      }if(type === "color"){
+        setSelectedFilters({
+          ...selectedFilters,
+          color: selectedFilters.color.includes(value)
+            ? selectedFilters.color.filter((item) => item !== value)
+            : [...selectedFilters.color, value],
+        })
       }
+
     }
   
     const filteredProducts = useMemo(() => {
@@ -58,6 +74,9 @@ export function FilterList({ products, images, brands }: { products: productType
           return false
         }
         if (selectedFilters.brand.length > 0 && !selectedFilters.brand.includes(product.brand)) {
+          return false
+        }
+        if (selectedFilters.color.length > 0 && !selectedFilters.color.includes(product.color)) {
           return false
         }
         return true
@@ -86,28 +105,16 @@ export function FilterList({ products, images, brands }: { products: productType
                 <AccordionTrigger className="text-base">Category</AccordionTrigger>
                 <AccordionContent>
                   <div className="grid gap-2">
-                    <Label className="flex items-center gap-2 font-normal">
-                      <Checkbox
-                        onCheckedChange={() => handleFilterChange("category", "Men")}
-                        checked={selectedFilters.category.includes("Men")}
+                    {categoryOptions.map((category) => (
+                      <Label key={category} className="flex items-center gap-2 font-normal">
+                        <Checkbox
+                        onCheckedChange={() => handleFilterChange("category", category)}
+                        checked={selectedFilters.category.includes(category)}
                       />
-                      Men
-                    </Label>
-                    <Label className="flex items-center gap-2 font-normal">
-                      <Checkbox
-                        onCheckedChange={() => handleFilterChange("category", "Women")}
-                        checked={selectedFilters.category.includes("Women")}
-                      />
-                      Women
-                    </Label>
-                    <Label className="flex items-center gap-2 font-normal">
-                      <Checkbox
-                        onCheckedChange={() => handleFilterChange("category", "Kids")}
-                        checked={selectedFilters.category.includes("Kids")}
-                      />
-                      Kids
-                    </Label>
-                  </div>
+                      {category}
+                      </Label>
+                    ))}
+                    </div>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -129,11 +136,31 @@ export function FilterList({ products, images, brands }: { products: productType
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
+            <Accordion type="single" collapsible>
+              <AccordionItem value="color">
+                <AccordionTrigger className="text-base">Color</AccordionTrigger>
+                <AccordionContent>
+                  <div className="grid gap-2">
+                    {colorOptions.map((color) => (
+                      <Label key={color} className="flex items-center gap-2 font-normal">
+                        <Checkbox
+                        onCheckedChange={() => handleFilterChange("color", color)}
+                        checked={selectedFilters.color.includes(color)}
+                      />
+                      {color}
+                      </Label>
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
         <div>
           <div className="flex items-center justify-between mb-4 md:hidden">
-            <h1 className="text-2xl font-bold">Glasses</h1>
+            {products[0]?.type === "Lunettes" ? 
+            <h1 className="text-lg font-semibold">Glasses</h1> : 
+            <h1 className="text-lg font-semibold">Watches</h1>}
             <Button size="icon" variant="ghost" onClick={() => setIsFilterOpen(true)}>
               <FilterIcon className="h-6 w-6" />
               <span className="sr-only">Open Filters</span>
