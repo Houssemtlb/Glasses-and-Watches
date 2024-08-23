@@ -24,7 +24,7 @@ export function PurchaseForm({id,price}: {id : string,price:number}) {
 
   return (
     <form action={action} className="space-y-2">
-      <div className="space-y-2">
+      <div className="space-y-1">
         <Label htmlFor="firstName">First Name</Label>
         <Input
           autoFocus
@@ -35,7 +35,7 @@ export function PurchaseForm({id,price}: {id : string,price:number}) {
         />
         {error?.firstName && <div className="text-destructive">{error.firstName}</div>}
       </div>
-      <div className="space-y-2">
+      <div className="space-y-1">
         <Label htmlFor="lastName">Last Name</Label>
         <Input
           autoFocus
@@ -46,7 +46,7 @@ export function PurchaseForm({id,price}: {id : string,price:number}) {
         />
         {error?.lastName && <div className="text-destructive">{error.lastName}</div>}
       </div>
-      <div className="space-y-2">
+      <div className="space-y-1">
         <Label htmlFor="email">Email</Label>
         <Input
           autoFocus
@@ -57,7 +57,7 @@ export function PurchaseForm({id,price}: {id : string,price:number}) {
         />
         {error?.email && <div className="text-destructive">{error.email}</div>}
       </div>
-      <div className="space-y-2">
+      <div className="space-y-1">
         <Label htmlFor="phone">Phone</Label>
         <Input
           autoFocus
@@ -68,7 +68,7 @@ export function PurchaseForm({id,price}: {id : string,price:number}) {
         />
         {error?.phone && <div className="text-destructive">{error.phone}</div>}
       </div>
-      <div className="space-y-2">
+      <div className="space-y-1">
         <Label htmlFor="wilaaya">Wilaaya</Label>
         <Input
           autoFocus
@@ -79,7 +79,7 @@ export function PurchaseForm({id,price}: {id : string,price:number}) {
         />
         {error?.wilaaya && <div className="text-destructive">{error.wilaaya}</div>}
       </div>
-      <div className="space-y-2">
+      <div className="space-y-1">
         <Label htmlFor="address">Address</Label>
         <Textarea
           autoFocus
@@ -89,7 +89,7 @@ export function PurchaseForm({id,price}: {id : string,price:number}) {
         />
         {error?.address && <div className="text-destructive">{error.address}</div>}
       </div>
-      <div className="space-y-2">
+      <div className="space-y-1">
         <Label htmlFor="quantity">Quantity</Label>
         <Input
           autoFocus

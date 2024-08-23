@@ -3,7 +3,7 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Product } from "@prisma/client"
+
 import { getImages, getImagesByProductId, getProductById } from "@/lib/products"
 import { useState } from "react"
 import { Dialog } from "@radix-ui/react-dialog"
@@ -23,7 +23,7 @@ type ProductCardProps = {
     images: { id: string; path: string }[]
   }
 
-export default async function ProductInfos({
+export default function ProductInfos({
     id,
     name,
     price,
@@ -107,7 +107,7 @@ export default async function ProductInfos({
         <div className="flex gap-2 w-full justify-center md:justify-start">
         <Dialog>
             <DialogTrigger asChild><Button size="lg" >Order Now</Button></DialogTrigger>
-            <DialogContent className="w-10/12 sm:max-w-md rounded-md" onOpenAutoFocus={e=>e.preventDefault()}>
+            <DialogContent className="w-10/12 h-5/6 sm:max-w-md rounded-md overflow-y-scroll" onOpenAutoFocus={e=>e.preventDefault()}>
                 <DialogHeader>
                     <DialogDescription >
                         <PurchaseForm id={id} price={price}/>
