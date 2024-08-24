@@ -26,7 +26,7 @@ export type imagesType = {
   productId: string;
 };
 
-export function FilterList({ products, images, brands }: { products: productType[]; images: imagesType[]; brands: string[] }) {
+export function FilterList({ products, images, brands, direction }: { products: productType[]; images: imagesType[]; brands: string[], direction: string }) {
   const colorOptions = Object.values(Colors);
   const categoryOptions = Object.values(Categories);
 
@@ -162,11 +162,7 @@ export function FilterList({ products, images, brands }: { products: productType
       </div>
       <div>
         <div className="flex items-center justify-between mb-4 md:hidden">
-          {products[0]?.type === "Lunettes" ? (
-            <h1 className="text-lg font-semibold">Glasses</h1>
-          ) : (
-            <h1 className="text-lg font-semibold">Watches</h1>
-          )}
+            <h1 className="text-lg font-semibold">{direction}</h1>
           <Button size="icon" variant="ghost" onClick={() => setIsFilterOpen(true)}>
             <FilterIcon className="h-6 w-6" />
             <span className="sr-only">Open Filters</span>

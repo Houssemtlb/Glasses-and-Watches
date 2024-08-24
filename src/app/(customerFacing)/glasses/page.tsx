@@ -50,7 +50,7 @@ async function GlassesPageComponent() {
   }, [])
 
   return (
-        <FilterList products={products} images={images} brands={brands} />
+        <FilterList products={products} images={images} brands={brands} direction="Glasses" />
   )
 }
 
