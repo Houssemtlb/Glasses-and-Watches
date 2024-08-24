@@ -52,13 +52,13 @@ export default function HomePage() {
   return (
     <main className="space-y-12">
       <ProductGridSection
-        title="Most Popular Glasses"
+        title="Popular Glasses"
         productsFetcher={getMostPopularGlasses}
         direction="glasses"
       />
       <ProductGridSection title="Newest Glasses" productsFetcher={getNewestGlasses} direction="glasses"/>
       <ProductGridSection
-        title="Most Popular Watches"
+        title="Popular Watches"
         productsFetcher={getMostPopularWatches}
         direction="watches"
       />

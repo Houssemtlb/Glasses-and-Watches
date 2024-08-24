@@ -88,7 +88,7 @@ export function FilterList({ products, images, brands }: { products: productType
     return (
       <div className="grid md:grid-cols-[200px_1fr] gap-10">
         <div
-          className={`fixed top-0 left-0 z-20 h-full w-full bg-background md:static md:block ${
+          className={`fixed overflow-scroll top-0 left-0 z-20 h-full w-full bg-background md:static md:block ${
             isFilterOpen ? "translate-x-0" : "-translate-x-full"
           } transition-transform duration-300 md:translate-x-0`}
         >
