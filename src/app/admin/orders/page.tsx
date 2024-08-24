@@ -52,7 +52,7 @@ async function OrdersTable() {
                 {orders.map(order => (
                 <TableRow key={order.id} className="hover:bg-gray-100 cursor-pointer">
                     <TableCell>{order.id}</TableCell>
-                    <TableCell>{order.totalPrice}</TableCell>
+                    <TableCell>{formatCurrency(order.totalPrice)}</TableCell>
                     <TableCell>{order.quantity}</TableCell>
                     <TableCell>{order.createdAt.toISOString().split('T')[0]}</TableCell>
                     <TableCell>

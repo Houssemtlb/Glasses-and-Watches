@@ -64,7 +64,7 @@ export function ProductCard({
   images,
 }: ProductCardProps) {
   return (
-    <Card className="w-full max-w-md min-w-56">
+    <Card className="flex flex-col w-full max-w-md min-w-56">
       <Carousel className="rounded-t-lg overflow-hidden">
         <CarouselContent>
           {images.map(image => (
@@ -87,13 +87,13 @@ export function ProductCard({
           <ChevronRightIcon className="h-5 w-5" />
         </CarouselNext>
       </Carousel>
-      <CardContent className="p-4 space-y-2">
+      <CardContent className="flex flex-col flex-grow p-4 space-y-2">
         <h3 className="text-xl font-bold">{name}</h3>
-        <p className="text-muted-foreground">
+        <p className="text-muted-foreground flex-grow">
           {description}
         </p>
-        <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold">{price}</div>
+        <div className="flex items-center justify-between mt-4">
+          <div className="text-2xl font-bold">{formatCurrency(price)}</div>
           <Button size="sm">
             <Link href={type==="Lunettes" ? `/glasses/${id}` : `/watches/${id}`}>
                 Buy now

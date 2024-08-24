@@ -78,7 +78,7 @@ async function ProductsTable() {
                 )}
               </TableCell>
               <TableCell>{product.name}</TableCell>
-              <TableCell>{product.price}</TableCell>
+              <TableCell>{formatCurrency(product.price)}</TableCell>
               <TableCell>{product.type}</TableCell>
               <TableCell>{product.brand}</TableCell>
               <TableCell>{product.category}</TableCell>
@@ -90,12 +90,6 @@ async function ProductsTable() {
                     <span className="sr-only">Actions</span>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
-                    <DropdownMenuItem asChild>
-                      <a download href={`/admin/products/${product.id}/download`}>
-                        Download
-                      </a>
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
                       <Link href={`/admin/products/${product.id}/edit`}>
                         Edit

@@ -1,4 +1,5 @@
 import { Nav, NavLink } from "@/components/Nav"
+import Link from "next/link"
 
 export const dynamic = "force-dynamic"
 
@@ -8,13 +9,20 @@ export default function Layout({
   children: React.ReactNode
 }>) {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Nav>
         <NavLink href="/">Home</NavLink>
         <NavLink href="/glasses">Glasses</NavLink>
         <NavLink href="/watches">Watches</NavLink>
       </Nav>
-      <div className="container my-6">{children}</div>
-    </>
+      <div className="flex-grow container my-6">
+        {children}
+      </div>
+      <footer className="bg-primary w-full text-white flex flex-col p-4 space-y-1">
+        <Link href="/">Home</Link>
+        <Link href="/glasses">Glasses</Link>
+        <Link href="/watches">Watches</Link>
+      </footer>
+    </div>
   )
 }

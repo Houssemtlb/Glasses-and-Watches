@@ -9,6 +9,7 @@ import { useState } from "react"
 import { Dialog } from "@radix-ui/react-dialog"
 import { PurchaseForm } from "./PurchaseForm"
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog"
+import { formatCurrency } from "@/lib/formatters"
 
 type ProductCardProps = {
     id: string
@@ -74,7 +75,7 @@ export default function ProductInfos({
         </div>
         <div className="grid gap-2">
           <div className="flex items-center gap-2">
-            <span className="text-2xl font-bold">{price}</span>
+            <span className="text-2xl font-bold">{formatCurrency(price)}</span>
             <Badge variant="outline">In Stock</Badge>
           </div>
           <p className="text-muted-foreground">
@@ -107,7 +108,7 @@ export default function ProductInfos({
         <div className="flex gap-2 w-full justify-center md:justify-start">
         <Dialog>
             <DialogTrigger asChild><Button size="lg" >Order Now</Button></DialogTrigger>
-            <DialogContent className="w-10/12 h-5/6 sm:max-w-md rounded-md overflow-y-scroll" onOpenAutoFocus={e=>e.preventDefault()}>
+            <DialogContent className="w-10/12 h-5/6 sm:h-auto sm:max-w-md rounded-md overflow-y-scroll sm:overflow-y-clip" onOpenAutoFocus={e=>e.preventDefault()}>
                 <DialogHeader>
                     <DialogDescription >
                         <PurchaseForm id={id} price={price}/>

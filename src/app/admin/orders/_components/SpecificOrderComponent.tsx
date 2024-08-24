@@ -1,3 +1,4 @@
+import { formatCurrency } from "@/lib/formatters";
 import { getSpecificOrderInfos } from "../../_actions/orders";
 import { DeleteOrderButton, ToggleValidateOrderButton } from "./SpecificOrderButtons";
 
@@ -132,7 +133,7 @@ export async function SpecificOrderComponent({id} : {id:string}) {
                     id="totalPrice"
                     type="text"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
-                    defaultValue={`${order.totalPrice} DA`}
+                    defaultValue={`${formatCurrency(order.totalPrice)}`}
                   />
                 </div>
                 <div>

@@ -51,7 +51,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
       <Label htmlFor="type">Type</Label>
       <Select name="type" required defaultValue={product?.type || ""}>
         <SelectTrigger className="w-full">
-          <SelectValue placeholder="Type" />
+          <SelectValue placeholder="--" />
         </SelectTrigger>
         <SelectContent>
           {typeOptions.map((type) => (
@@ -78,7 +78,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
       <Label htmlFor="category">Category</Label>
       <Select name="category" required defaultValue={product?.category || ""}>
         <SelectTrigger className="w-full">
-          <SelectValue placeholder="Category" />
+          <SelectValue placeholder="--" />
         </SelectTrigger>
         <SelectContent>
           {categoryOptions.map((category) => (
@@ -96,7 +96,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
         <Label htmlFor="color">Color</Label>
         <Select name="color" required defaultValue={product?.color || ""}>
         <SelectTrigger className="w-full">
-          <SelectValue placeholder="Color" />
+          <SelectValue placeholder="--" />
         </SelectTrigger>
         <SelectContent>
           {colorOptions.map((color) => (
@@ -122,7 +122,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
         {error.dimensions && <div className="text-destructive">{error.dimensions}</div>}
       </div>
       <div className="space-y-2">
-        <Label htmlFor="price">Price In Cents</Label>
+        <Label htmlFor="price">Price</Label>
         <Input
           type="number"
           id="price"
