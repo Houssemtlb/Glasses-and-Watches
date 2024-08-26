@@ -2,11 +2,10 @@
 
 import db from "@/db/db"
 import { z } from "zod"
-import fs from "fs/promises"
 import { notFound, redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
-import path from "path"
-
+import { bucket } from "@/lib/firebaseAdmin"; // Import the bucket from Firebase Admin SDK
+import { extractFromProductsAndFormat } from "@/lib/formatters"
 
 const imageSchema = z.instanceof(File).refine(
   file => file.size === 0 || file.type.startsWith("image/"),
@@ -38,7 +37,6 @@ const updateSchema = z.object({
 })
 
 export async function addProduct(prevState: unknown, formData: FormData) {
-  // Extract fields from FormData
   const name = formData.get('name');
   const price = formData.get('price');
   const description = formData.get('description');
@@ -49,7 +47,6 @@ export async function addProduct(prevState: unknown, formData: FormData) {
   const category = formData.get('category');
   const images = formData.getAll('images');
 
-  // Parse and validate using zod
   const result = addSchema.safeParse({
     name,
     price,
@@ -63,29 +60,39 @@ export async function addProduct(prevState: unknown, formData: FormData) {
   });
 
   if (result.success === false) {
-    return result.error.formErrors.fieldErrors
+    return result.error.formErrors.fieldErrors;
   }
 
-  const data = result.data
+  const data = result.data;
+  const imagePaths = [];
 
-  //create imagePaths type 
-  type ImagePathsType = { path: string }[]
+  // Upload each image to Firebase Storage using Admin SDK
+  for (const image of data.images) {
+    try {
+      const identifier = `${crypto.randomUUID()}-${image.name}`
+      const fileName = `products/${identifier}`;
+      const file = bucket.file(fileName);
 
-  const imagePaths: ImagePathsType = []
+      // Convert image to Buffer
+      const fileBuffer = Buffer.from(await image.arrayBuffer());
+      
+      // Save file to Firebase Storage
+      await file.save(fileBuffer, {
+        metadata: {
+          contentType: image.type,
+        },
+      });
+      
+      const fileNameStorage = `products%2F${identifier}`;
 
-  await fs.mkdir("public/products", { recursive: true });
-
-  data.images.map(async (image, index) => {
-
-    const imagePath = `/products/${crypto.randomUUID()}-${image.name}`
-    //append the paths to an array imagePaths
-    imagePaths.push({path: `${imagePath}`})
-    
-    await fs.writeFile(
-      `public${imagePath}`,
-      Buffer.from(await image.arrayBuffer())
-    );
-  });
+      // Generate download URL
+      const downloadURL = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${fileNameStorage}?alt=media`;
+      imagePaths.push({ path: downloadURL });
+    } catch (error) {
+      console.error(`Failed to upload image ${image.name}:`, error);
+      // Handle the error as appropriate for your application
+    }
+  }
 
   await db.product.create({
     data: {
@@ -100,14 +107,13 @@ export async function addProduct(prevState: unknown, formData: FormData) {
       dimensions: data.dimensions,
       images: { create: imagePaths },
     },
-  })
+  });
 
-  revalidatePath("/")
-  revalidatePath("/products")
+  revalidatePath("/");
+  revalidatePath("/products");
 
-  redirect("/admin/products")
+  redirect("/admin/products");
 }
-
 
 export async function updateProduct(
   id: string,
@@ -154,46 +160,30 @@ export async function toggleProductAvailability(
   revalidatePath("/products")
 }
 
-export async function deleteProduct(id : string) {
-  // Find the product by ID
+export async function deleteProduct(id: string) {
   const product = await db.product.findUnique({ where: { id } });
 
   if (!product) {
-    return notFound(); // Handle product not found case
+    return notFound();
   }
-
-  // Find all images related to the product
+  
   const images = await db.image.findMany({ where: { productId: id } });
-  images.map((image) => console.log(`here are the path : ${image.path}`));
-
-  // Delete images from file system
+  
+  // Delete images from Firebase Storage using Admin SDK
   await Promise.all(images.map(async (image) => {
+    const file = bucket.file(extractFromProductsAndFormat(image.path));
     try {
-      const filePath = path.join('public', image.path);
-      console.log(`Deleting file: ${filePath}`);
-      
-      const stat = await fs.stat(filePath);
-      if (stat.isFile()) {
-        await fs.unlink(filePath);
-        console.log(`File deleted: ${filePath}`);
-      } else {
-        console.error(`Path is not a file: ${filePath}`);
-      }
+      await file.delete();
     } catch (error) {
-      console.error(`Failed to delete file: ${image.path}`, error);
+      console.error(`Failed to delete image: ${image.path}`, error);
     }
   }));
 
-  // Delete related images from the database
   await db.image.deleteMany({ where: { productId: id } });
-
-  // Delete the product from the database
   await db.product.delete({ where: { id } });
 
-  // Revalidate paths to clear any cached data
   revalidatePath("/");
   revalidatePath("/products");
 
-  // Redirect to the products admin page
   redirect("/admin/products");
 }
