@@ -53,7 +53,7 @@ const getNewestGlasses = cache(() => {
 export default function HomePage() {
   return (
     <main>
-      <CarouselSection/>
+      <HeroSection/>
       <div className="container space-y-12 my-12 pb-10">
         <ProductGridSection
           title="Popular Glasses"
@@ -72,7 +72,7 @@ export default function HomePage() {
   )
 }
 
-export function CarouselSection(){
+function HeroSection(){
   return(
     <div>
       <Suspense fallback={
