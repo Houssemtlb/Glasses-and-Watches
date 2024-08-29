@@ -17,7 +17,7 @@ export function LandingCarousel({images} : {images: carouselType[]}) {
             <CarouselItem key={image.id}>
                 <div className="relative w-full aspect-[16/10] sm:aspect-[16/6] overflow-hidden">
                 <Image
-                    unoptimized
+                    priority
                     src={image.path}
                     height={500}
                     width={400}
