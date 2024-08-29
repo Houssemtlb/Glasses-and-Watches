@@ -69,7 +69,7 @@ export function ProductCard({
         <CarouselContent>
           {images.map(image => (
             <CarouselItem key={image.id}>
-              <img
+              <Image
                 src={image.path}
                 alt="Product Image"
                 width={500}
