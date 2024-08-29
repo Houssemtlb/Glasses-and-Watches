@@ -1,6 +1,5 @@
 import { Nav, NavLink } from "@/components/Nav"
 import Link from "next/link"
-import { CarouselSection } from "./page"
 
 export const dynamic = "force-dynamic"
 
