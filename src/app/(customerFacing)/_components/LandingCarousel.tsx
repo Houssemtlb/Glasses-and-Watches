@@ -13,11 +13,11 @@ export function LandingCarousel({images} : {images: carouselType[]}) {
   return (
     <Carousel className="w-full" opts={{ loop: true}}>
       <CarouselContent>
-        {images.map((image,idx)=>(
+        {images.map((image)=>(
             <CarouselItem>
                 <div className="relative w-full aspect-[16/10] sm:aspect-[16/6] overflow-hidden">
                 <img
-                    key={idx}
+                    key={image.id}
                     src={image.path}
                     alt="Slide"
                     className="w-full h-full object-cover"
