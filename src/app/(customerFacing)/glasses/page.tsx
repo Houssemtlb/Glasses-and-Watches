@@ -11,7 +11,7 @@ import { FilterList, imagesType, productType } from "../_components/FilterList"
 
 export default function GlassesPage() {
   return (
-    <>
+    <div className="container space-y-12 my-12 pb-10">
         <Suspense
           fallback={
             <div className="md:ml-60 sm:ml-0">
@@ -26,13 +26,13 @@ export default function GlassesPage() {
             </div>
           }
         >
-          <GlassesPageComponent />
+          <GlassesPageSuspense />
         </Suspense>
-    </>
+    </div>
   )
 }
 
-async function GlassesPageComponent() {
+async function GlassesPageSuspense() {
   const [products, setProducts] = useState<productType[]>([])
   const [images, setImages] = useState<imagesType[]>([])
   const [brands, setBrands] = useState<string[]>([])

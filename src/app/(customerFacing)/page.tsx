@@ -2,11 +2,13 @@ import { ProductCard, ProductCardSkeleton } from "@/components/ProductCard"
 import { Button } from "@/components/ui/button"
 import db from "@/db/db"
 import { cache } from "@/lib/cache"
+import { getDiapoImages } from "@/lib/diaporama"
 import { getImages } from "@/lib/products"
 import { Product } from "@prisma/client"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { Suspense } from "react"
+import { LandingCarousel, LandingCarouselSkelton } from "./_components/LandingCarousel"
 
 const getMostPopularWatches = cache(
   () => {
@@ -50,20 +52,37 @@ const getNewestGlasses = cache(() => {
 
 export default function HomePage() {
   return (
-    <main className="space-y-12">
-      <ProductGridSection
-        title="Popular Glasses"
-        productsFetcher={getMostPopularGlasses}
-        direction="glasses"
-      />
-      <ProductGridSection title="Newest Glasses" productsFetcher={getNewestGlasses} direction="glasses"/>
-      <ProductGridSection
-        title="Popular Watches"
-        productsFetcher={getMostPopularWatches}
-        direction="watches"
-      />
-      <ProductGridSection title="Newest Watches" productsFetcher={getNewestWatches} direction="watches"/>
+    <main>
+      <CarouselSection/>
+      <div className="container space-y-12 my-12 pb-10">
+        <ProductGridSection
+          title="Popular Glasses"
+          productsFetcher={getMostPopularGlasses}
+          direction="glasses"
+        />
+        <ProductGridSection title="Newest Glasses" productsFetcher={getNewestGlasses} direction="glasses"/>
+        <ProductGridSection
+          title="Popular Watches"
+          productsFetcher={getMostPopularWatches}
+          direction="watches"
+        />
+        <ProductGridSection title="Newest Watches" productsFetcher={getNewestWatches} direction="watches"/>
+      </div>
     </main>
+  )
+}
+
+export function CarouselSection(){
+  return(
+    <div>
+      <Suspense fallback={
+        <>
+          <LandingCarouselSkelton/>
+        </>
+      }>
+        <LandingCarouselSuspense/>
+      </Suspense>
+    </div>  
   )
 }
 
@@ -81,15 +100,15 @@ function ProductGridSection({
   return (
     <div className="space-y-4">
       <div className="flex gap-4">
-        <h2 className="text-3xl font-bold">{title}</h2>
-        <Button variant="outline" asChild>
+        <h2 className="text-3xl font-bold text-primary">{title}</h2>
+        <Button variant="outline" className="text-primary" asChild>
           <Link href={`/${direction}`} className="space-x-2">
             <span>View All</span>
             <ArrowRight className="size-4" />
           </Link>
         </Button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-hidden">
         <Suspense
           fallback={
             <>
@@ -127,4 +146,16 @@ async function ProductSuspense({
       category={product.category}
     />
   ))
+}
+
+
+
+async function LandingCarouselSuspense(){
+  const carouselImages = await getDiapoImages()
+  
+  return(
+    <>
+      <LandingCarousel images={carouselImages}/>
+    </>
+  )
 }

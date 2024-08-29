@@ -6,6 +6,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Categories, Colors } from "@/lib/enums";
 
+
+//CORRECT FETCHING ALL THE IMAGES AT ONCE, USE PAGINATION CORRECTLY !! OR YOU'LL PAY MORE
+
 export type productType = {
   id: string;
   name: string;
@@ -163,7 +166,7 @@ export function FilterList({ products, images, brands, direction }: { products: 
       <div>
         <div className="flex items-center justify-between mb-4 md:hidden">
             <h1 className="text-lg font-semibold">{direction}</h1>
-          <Button size="icon" variant="ghost" onClick={() => setIsFilterOpen(true)}>
+          <Button size="sm" variant="default" onClick={() => setIsFilterOpen(true)}>
             <FilterIcon className="h-6 w-6" />
             <span className="sr-only">Open Filters</span>
           </Button>

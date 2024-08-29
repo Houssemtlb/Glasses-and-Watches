@@ -37,18 +37,9 @@ export default function ProductInfos({
     images,
   }: ProductCardProps) {
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-
-    const handleButtonClick = () => {
-        setIsModalVisible(true);
-    };
-
-    const handleCloseModal = () => {
-        setIsModalVisible(false);
-    };
 
   return (
-    <div className="grid md:grid-cols-2 gap-6 lg:gap-48 items-start max-w-6xl px-4 mx-auto py-6">
+    <div className="grid md:grid-cols-2 gap-6 lg:gap-72 items-start max-w-6xl px-4 mx-auto py-6">
       <div className="grid gap-4 md:gap-8">
         <Carousel className="w-full">
           <CarouselContent>
@@ -71,38 +62,38 @@ export default function ProductInfos({
       </div>
       <div className="grid gap-4 md:gap-8">
         <div className="grid gap-2">
-          <h1 className="text-3xl font-bold">{name}</h1>
+          <h1 className="text-3xl font-bold text-primary">{name}</h1>
         </div>
         <div className="grid gap-2">
           <div className="flex items-center gap-2">
-            <span className="text-2xl font-bold">{formatCurrency(price)}</span>
-            <Badge variant="outline">In Stock</Badge>
+            <span className="text-2xl font-bold text-primary">{formatCurrency(price)}</span>
+            <Badge variant="outline" className="text-primary">In Stock</Badge>
           </div>
-          <p className="text-muted-foreground">
+          <p className="text-muted-text-base">
             {description}
           </p>
         </div>
         <div className="grid gap-2">
           <div className="flex items-center gap-2">
-            <span className="text-base font-medium">Type:</span>
-            <span className="text-muted-foreground">{type}</span>
+            <span className="text-primary font-medium ">Type:</span>
+            <span className="text-muted-text-base">{type}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-base font-medium">Brand:</span>
-            <span className="text-muted-foreground">{brand}</span>
+            <span className="text-primary font-medium">Brand:</span>
+            <span className="text-muted-text-base">{brand}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-base font-medium">Category:</span>
-            <span className="text-muted-foreground">{category}</span>
+            <span className="text-primary font-medium">Category:</span>
+            <span className="text-muted-text-base">{category}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-base font-medium">Color:</span>
-            <span className="text-muted-foreground">{color}</span>
+            <span className="text-primary font-medium">Color:</span>
+            <span className="text-muted-text-base">{color}</span>
           </div>
           {dimensions && 
             <div className="flex items-center gap-2">
-              <span className="text-base font-medium">Dimensions:</span>
-              <span className="text-muted-foreground">{dimensions}</span>
+              <span className="text-primary font-medium">Dimensions:</span>
+              <span className="text-muted-text-base">{dimensions}</span>
             </div>}
         </div>
         <div className="flex gap-2 w-full justify-center md:justify-start">

@@ -1,5 +1,6 @@
 import { Nav, NavLink } from "@/components/Nav"
 import Link from "next/link"
+import { CarouselSection } from "./page"
 
 export const dynamic = "force-dynamic"
 
@@ -15,7 +16,7 @@ export default function Layout({
         <NavLink href="/glasses">Glasses</NavLink>
         <NavLink href="/watches">Watches</NavLink>
       </Nav>
-      <div className="flex-grow container my-6">
+      <div className="flex-grow">
         {children}
       </div>
       <footer className="bg-primary w-full text-white flex flex-col p-4 space-y-1">

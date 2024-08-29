@@ -8,8 +8,8 @@ export default async function SpecificWatchPage({
   })
   {
     return(
-        <>
+        <div className="container space-y-12 my-12 pb-10">
             <SpecificProduct id={id} />
-        </>
+        </div>
     )
 }

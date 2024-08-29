@@ -88,12 +88,12 @@ export function ProductCard({
         </CarouselNext>
       </Carousel>
       <CardContent className="flex flex-col flex-grow p-4 space-y-2">
-        <h3 className="text-xl font-bold">{name}</h3>
-        <p className="text-muted-foreground flex-grow">
+        <h3 className="text-xl font-bold text-primary">{name}</h3>
+        <p className="text-base flex-grow">
           {description}
         </p>
         <div className="flex items-center justify-between mt-4">
-          <div className="text-2xl font-bold">{formatCurrency(price)}</div>
+          <div className="text-2xl font-bold text-primary">{formatCurrency(price)}</div>
           <Button size="sm">
             <Link href={type==="Lunettes" ? `/glasses/${id}` : `/watches/${id}`}>
                 Buy now

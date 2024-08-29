@@ -10,6 +10,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Diapo {
+  id        String   @id @default(uuid())
+  path      String
+  createdAt DateTime @default(now())
+}
+
 
 model Product {
   id                     String                 @id @default(uuid())
