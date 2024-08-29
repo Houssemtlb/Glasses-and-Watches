@@ -1,7 +1,7 @@
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Skeleton } from "@/components/ui/skeleton"
-import { imagesType } from "./FilterList"
-import Link from "next/link"
+import Image from "next/image"
+
 
 type carouselType = {
     id: string;
@@ -14,13 +14,16 @@ export function LandingCarousel({images} : {images: carouselType[]}) {
     <Carousel className="w-full" opts={{ loop: true}}>
       <CarouselContent>
         {images.map((image)=>(
-            <CarouselItem>
+            <CarouselItem key={image.id}>
                 <div className="relative w-full aspect-[16/10] sm:aspect-[16/6] overflow-hidden">
-                <img
-                    key={image.id}
+                <Image
+                    unoptimized
                     src={image.path}
+                    height={500}
+                    width={400}
                     alt="Slide"
                     className="w-full h-full object-cover"
+                    style={{ aspectRatio: "500/400", objectFit: "cover" }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.5)] to-[rgba(0,0,0,0.1)]" />
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 md:px-8 lg:px-12 space-y-4">

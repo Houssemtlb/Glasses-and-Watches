@@ -4,8 +4,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 
-import { getImages, getImagesByProductId, getProductById } from "@/lib/products"
-import { useState } from "react"
+import Image from "next/image"
 import { Dialog } from "@radix-ui/react-dialog"
 import { PurchaseForm } from "./PurchaseForm"
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog"
@@ -45,11 +44,11 @@ export default function ProductInfos({
           <CarouselContent>
           {images.map(image => (
             <CarouselItem key={image.id}>
-              <img
+              <Image
                 src={image.path}
                 alt="Product Image"
-                width={500}
-                height={400}
+                height={500}
+                width={400}
                 className="aspect-[4/3] object-cover rounded-lg"
                 style={{ aspectRatio: "500/400", objectFit: "contain" }}
               />
