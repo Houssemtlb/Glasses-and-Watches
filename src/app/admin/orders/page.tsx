@@ -13,7 +13,7 @@ export default function AdminOrdersPage(){
     return(
         <>
             <div className="flex justify-between gap-4">
-                <PageHeader>Products</PageHeader>
+                <PageHeader>Orders</PageHeader>
             </div>
             <OrdersTable />
         </>

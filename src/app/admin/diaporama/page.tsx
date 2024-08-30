@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useFormState, useFormStatus } from "react-dom"
-import { Product } from "@prisma/client"
 import { editDiapo } from "../_actions/diaporama"
 
 

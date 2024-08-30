@@ -14,7 +14,7 @@ export default function AdminUsersPage(){
     return(
         <>
             <div className="flex justify-between gap-4">
-                <PageHeader>Products</PageHeader>
+                <PageHeader>Customers</PageHeader>
             </div>
             <UsersTable />
         </>
