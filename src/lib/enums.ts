@@ -29,4 +29,5 @@ export enum Colors {
   export enum Types {
     Lunettes = 'Lunettes',
     Montre = 'Montre',
+    Accessoire = 'Accessoire'
   }

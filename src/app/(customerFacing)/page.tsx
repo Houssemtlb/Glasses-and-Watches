@@ -10,45 +10,54 @@ import Link from "next/link"
 import { Suspense } from "react"
 import { LandingCarousel, LandingCarouselSkelton } from "./_components/LandingCarousel"
 
-const getMostPopularWatches = cache(
-  () => {
+async function getMostPopularWatches(){
     return db.product.findMany({
       where: { isAvailableForPurchase: true, type: "Montre" },
       orderBy: { orders: { _count: "desc" } },
       take: 4,
     })
-  },
-  ["/", "getMostPopularWatches"],
-  { revalidate: 60 * 60 * 24 }
-)
+  }
 
-const getNewestWatches = cache(() => {
+async function getNewestWatches(){
   return db.product.findMany({
     where: { isAvailableForPurchase: true, type: "Montre" },
     orderBy: { createdAt: "desc" },
     take: 4,
   })
-}, ["/", "getNewestWatches"])
+}
 
-const getMostPopularGlasses = cache(
-  () => {
+async function getMostPopularGlasses(){
     return db.product.findMany({
       where: { isAvailableForPurchase: true, type: "Lunettes" },
       orderBy: { orders: { _count: "desc" } },
       take: 4,
     })
-  },
-  ["/", "getMostPopularGlasses"],
-  { revalidate: 60 * 60 * 24 }
-)
+  }
 
-const getNewestGlasses = cache(() => {
+
+async function getNewestGlasses(){
   return db.product.findMany({
     where: { isAvailableForPurchase: true, type: "Lunettes" },
     orderBy: { createdAt: "desc" },
     take: 4,
   })
-}, ["/", "getNewestGlassess"])
+}
+
+async function getNewstAccessories(){
+  return db.product.findMany({
+    where: { isAvailableForPurchase: true, type: "Accessoire" },
+    orderBy: { createdAt: "desc" },
+    take: 4,
+  })
+}
+
+async function getMostPopularAccessories(){
+  return db.product.findMany({
+    where: { isAvailableForPurchase: true, type: "Accessoire" },
+    orderBy: { orders: { _count: "desc" } },
+    take: 4,
+  })
+}
 
 export default function HomePage() {
   return (
@@ -67,6 +76,12 @@ export default function HomePage() {
           direction="watches"
         />
         <ProductGridSection title="Newest Watches" productsFetcher={getNewestWatches} direction="watches"/>
+        <ProductGridSection
+          title="Popular Accessories"
+          productsFetcher={getMostPopularAccessories}
+          direction="accessories"
+        />
+        <ProductGridSection title="Newest Accessories" productsFetcher={getNewstAccessories} direction="accessories"/>
       </div>
     </main>
   )

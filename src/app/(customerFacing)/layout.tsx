@@ -14,6 +14,7 @@ export default function Layout({
         <NavLink href="/">Home</NavLink>
         <NavLink href="/glasses">Glasses</NavLink>
         <NavLink href="/watches">Watches</NavLink>
+        <NavLink href="/accessories">Accessories</NavLink>
       </Nav>
       <div className="flex-grow">
         {children}
@@ -22,6 +23,7 @@ export default function Layout({
         <Link href="/">Home</Link>
         <Link href="/glasses">Glasses</Link>
         <Link href="/watches">Watches</Link>
+        <Link href="/accessories">Accessories</Link>
       </footer>
     </div>
   )

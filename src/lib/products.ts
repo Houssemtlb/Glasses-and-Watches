@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import db from "@/db/db";
 
@@ -9,7 +9,7 @@ export async function getProducts() {
     });
     return products;
   } catch (error) {
-    console.error("Error fetching products:", error); // Log any errors
+    console.error("Error fetching products:", error);
     return [];
   }
 }
@@ -17,25 +17,35 @@ export async function getProducts() {
 export async function getGlasses() {
   try {
     const glasses = await db.product.findMany({
-      where: { isAvailableForPurchase: true ,type: "Lunettes"},
-      },
-    );
+      where: { isAvailableForPurchase: true, type: "Lunettes" },
+    });
     return glasses;
   } catch (error) {
-    console.error("Error fetching products:", error); // Log any errors
+    console.error("Error fetching products:", error);
     return [];
   }
 }
 
-export async function getWatches(){
+export async function getWatches() {
   try {
     const watches = await db.product.findMany({
-      where: { isAvailableForPurchase: true ,type: "Montre"},
-      },
-    );
+      where: { isAvailableForPurchase: true, type: "Montre" },
+    });
     return watches;
   } catch (error) {
-    console.error("Error fetching products:", error); // Log any errors
+    console.error("Error fetching products:", error);
+    return [];
+  }
+}
+
+export async function getAccessories(){
+  try {
+    const accessories = await db.product.findMany({
+      where: { isAvailableForPurchase: true, type: "Accessoire" },
+    });
+    return accessories;
+  } catch (error) {
+    console.error("Error fetching products:", error);
     return [];
   }
 }
@@ -45,7 +55,7 @@ export async function getImages() {
     const images = await db.image.findMany();
     return images;
   } catch (error) {
-    console.error("Error fetching images:", error); // Log any errors
+    console.error("Error fetching images:", error);
     return [];
   }
 }
@@ -53,33 +63,46 @@ export async function getImages() {
 export async function getGlassesImages() {
   try {
     const products = await getGlasses();
-    const glassesImages = await Promise.all(products.map(async product => {
-      const images = await db.image.findMany({
+    const glassesImages = await Promise.all(products.map(product => 
+      db.image.findMany({
         where: { productId: product.id },
-      });
-      return images;
-    }));
+      })
+    ));
     return glassesImages.flat();
-    
   } catch (error) {
     console.error("Error fetching data for glasses page:", error);
     return [];
   }
 }
 
-export async function getWatchesImages(){
+export async function getWatchesImages() {
   try {
     const products = await getWatches();
-    const watchesImages = await Promise.all(products.map(async product => {
-      const images = await db.image.findMany({
+    const watchesImages = await Promise.all(products.map(product => 
+      db.image.findMany({
         where: { productId: product.id },
-      });
-      return images;
-    }));
+      })
+    ));
     return watchesImages.flat();
-    
   } catch (error) {
     console.error("Error fetching data for watches page:", error);
+    return [];
+  }
+}
+
+export async function getAccessoriesImages(){
+  try {
+    const products = await db.product.findMany({
+      where: { isAvailableForPurchase: true, type: "Accessoire" },
+    });
+    const accessoriesImages = await Promise.all(products.map(product => 
+      db.image.findMany({
+        where: { productId: product.id },
+      })
+    ));
+    return accessoriesImages.flat();
+  } catch (error) {
+    console.error("Error fetching data for accessories page:", error);
     return [];
   }
 }
@@ -91,7 +114,7 @@ export async function getProductById(id: string) {
     });
     return product;
   } catch (error) {
-    console.error("Error fetching product by ID:", error); // Log any errors
+    console.error("Error fetching product by ID:", error);
     return null;
   }
 }
@@ -103,42 +126,55 @@ export async function getImagesByProductId(productId: string) {
     });
     return images;
   } catch (error) {
-    console.error("Error fetching images by product ID:", error); // Log any errors
+    console.error("Error fetching images by product ID:", error);
     return [];
   }
 }
 
-export async function getAvailableGlassesBrands(){
+export async function getAvailableGlassesBrands() {
   try {
     const brands = await db.product.findMany({
       distinct: ['brand'],
       where: { 
         isAvailableForPurchase: true, 
-        type : "Lunettes"
-       },
+        type: "Lunettes"
+      },
     });
-    //i only want the brand string value
     return brands.map(brand => brand.brand);
   } catch (error) {
-    console.error("Error fetching brands:", error); // Log any errors
+    console.error("Error fetching brands:", error);
     return [];
   }
 }
 
-export async function getAvailableWatchesBrands(){
+export async function getAvailableWatchesBrands() {
   try {
     const brands = await db.product.findMany({
       distinct: ['brand'],
       where: { 
         isAvailableForPurchase: true, 
-        type : "Montre"
-       },
+        type: "Montre"
+      },
     });
     return brands.map(brand => brand.brand);
   } catch (error) {
-    console.error("Error fetching brands:", error); // Log any errors
+    console.error("Error fetching brands:", error);
     return [];
   }
 }
 
-
+export async function getAvailableAccessoriesBrands(){
+  try {
+    const brands = await db.product.findMany({
+      distinct: ['brand'],
+      where: { 
+        isAvailableForPurchase: true, 
+        type: "Accessoire"
+      },
+    });
+    return brands.map(brand => brand.brand);
+  } catch (error) {
+    console.error("Error fetching brands:", error);
+    return [];
+  }
+}
