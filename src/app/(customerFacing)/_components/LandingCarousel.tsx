@@ -16,7 +16,7 @@ export function LandingCarousel({images} : {images: carouselType[]}) {
         {images.map((image)=>(
             <CarouselItem key={image.id}>
                 <div className="relative w-full aspect-[16/10] sm:aspect-[16/6] overflow-hidden">
-                <img
+                <Image
                     src={image.path}
                     height={500}
                     width={400}
