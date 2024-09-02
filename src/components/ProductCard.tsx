@@ -64,8 +64,8 @@ export function ProductCard({
   images,
 }: ProductCardProps) {
   return (
-    <Card className="flex flex-col w-full max-w-md min-w-56">
-      <Carousel className="rounded-t-lg overflow-hidden">
+    <Card className="flex flex-col w-full max-w-md min-w-56 min-h-[350px]">
+      <Carousel opts={{ loop: true}} className="rounded-t-lg overflow-hidden">
         <CarouselContent>
           {images.map(image => (
             <CarouselItem key={image.id}>
@@ -74,7 +74,7 @@ export function ProductCard({
                 alt="Product Image"
                 width={500}
                 height={400}
-                className="object-cover w-full h-64"
+                className="object-cover w-full h-64 "
                 style={{ aspectRatio: "500/400", objectFit: "contain" }}
               />
             </CarouselItem>
@@ -87,10 +87,10 @@ export function ProductCard({
           <ChevronRightIcon className="h-5 w-5" />
         </CarouselNext>
       </Carousel>
-      <CardContent className="flex flex-col flex-grow p-4 space-y-2">
+      <CardContent className="flex flex-col flex-grow p-4 ">
         <h3 className="text-xl font-bold text-primary">{name}</h3>
         <p className="text-base flex-grow">
-          {description}
+          {brand}
         </p>
         <div className="flex items-center justify-between mt-4">
           <div className="text-2xl font-bold text-primary">{formatCurrency(price)}</div>

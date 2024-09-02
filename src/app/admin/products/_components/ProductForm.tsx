@@ -142,8 +142,6 @@ export function ProductForm({ product }: { product?: Product | null }) {
           name="description"
           required
           defaultValue={product?.description}
-          minLength={50}
-          maxLength={85}
         />
         {error.description && (
           <div className="text-destructive">{error.description}</div>
