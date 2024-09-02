@@ -7,7 +7,7 @@ export async function SpecificOrderComponent({id} : {id:string}) {
     const orderDetails = await getSpecificOrderInfos(id);
   
     if (!orderDetails) {
-      return <div>La commande n'existe pas</div>;
+      return <div>Commande introuvable</div>;
     }
   
     const { order, product, user } = orderDetails;
