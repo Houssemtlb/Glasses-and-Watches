@@ -25,7 +25,7 @@ export function PurchaseForm({id,price}: {id : string,price:number}) {
   return (
     <form action={action} className="space-y-2">
       <div className="space-y-1">
-        <Label htmlFor="firstName">First Name</Label>
+        <Label htmlFor="firstName">Prénom</Label>
         <Input
           autoFocus
           type="text"
@@ -36,7 +36,7 @@ export function PurchaseForm({id,price}: {id : string,price:number}) {
         {error?.firstName && <div className="text-destructive">{error.firstName}</div>}
       </div>
       <div className="space-y-1">
-        <Label htmlFor="lastName">Last Name</Label>
+        <Label htmlFor="lastName">Nom</Label>
         <Input
           autoFocus
           type="text"
@@ -58,7 +58,7 @@ export function PurchaseForm({id,price}: {id : string,price:number}) {
         {error?.email && <div className="text-destructive">{error.email}</div>}
       </div>
       <div className="space-y-1">
-        <Label htmlFor="phone">Phone</Label>
+        <Label htmlFor="phone">Téléphone</Label>
         <Input
           autoFocus
           type="tel"
@@ -69,7 +69,7 @@ export function PurchaseForm({id,price}: {id : string,price:number}) {
         {error?.phone && <div className="text-destructive">{error.phone}</div>}
       </div>
       <div className="space-y-1">
-        <Label htmlFor="wilaaya">Wilaaya</Label>
+        <Label htmlFor="wilaaya">Wilaya</Label>
         <Input
           autoFocus
           type="text"
@@ -80,7 +80,7 @@ export function PurchaseForm({id,price}: {id : string,price:number}) {
         {error?.wilaaya && <div className="text-destructive">{error.wilaaya}</div>}
       </div>
       <div className="space-y-1">
-        <Label htmlFor="address">Address</Label>
+        <Label htmlFor="address">Adresse</Label>
         <Textarea
           autoFocus
           id="address"
@@ -90,7 +90,7 @@ export function PurchaseForm({id,price}: {id : string,price:number}) {
         {error?.address && <div className="text-destructive">{error.address}</div>}
       </div>
       <div className="space-y-1">
-        <Label htmlFor="quantity">Quantity</Label>
+        <Label htmlFor="quantity">Quantité</Label>
         <Input
           autoFocus
           type="number"
@@ -117,11 +117,11 @@ function SubmitButton() {
   return (
     <Button type="submit" disabled={pending} onClick={()=>{
       toast({
-        title: "Thank you for your purchase!",
-        description: "Our team members will contact you shortly to confirm your order.",
+        title: "Merci pour votre achat !",
+        description: "Nos membres de l'équipe vous contacteront sous peu pour confirmer votre commande.",
       })
     }}>
-      {pending ? "Saving..." : "Order"}
+      {pending ? "Enregistrement..." : "Commander"}
     </Button>
   )
 }

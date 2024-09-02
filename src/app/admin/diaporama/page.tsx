@@ -30,7 +30,7 @@ function SubmitButton() {
 
   return (
     <Button type="submit" disabled={pending}>
-      {pending ? "Saving..." : "Save"}
+      {pending ? "Enregistrement..." : "Enregistrer"}
     </Button>
   )
 }

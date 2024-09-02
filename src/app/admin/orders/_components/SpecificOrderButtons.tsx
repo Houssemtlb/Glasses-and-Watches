@@ -15,7 +15,7 @@ export function ToggleValidateOrderButton({ id, isValid }: { id: string, isValid
                 redirect("/admin/orders")
             })
         }}>
-        {isValid ? "Unvalidate order" : "Validate order"}
+        {isValid ? "Annuler commande" : "Valider commande"}
         </Button>
     )
 }
@@ -30,7 +30,7 @@ export function DeleteOrderButton({ id }: { id: string }) {
             redirect("/admin/orders")
         })
     }}>
-        Delete Order
+        Supprimer commande
     </Button>
     )
 }

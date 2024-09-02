@@ -4,7 +4,7 @@ import { ProductForm } from "../_components/ProductForm"
 export default function NewProductPage() {
   return (
     <>
-      <PageHeader>Add Product</PageHeader>
+      <PageHeader>Nouveau produit</PageHeader>
       <ProductForm />
     </>
   )

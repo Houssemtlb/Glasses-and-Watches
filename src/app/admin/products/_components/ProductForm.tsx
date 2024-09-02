@@ -1,6 +1,5 @@
 "use client"
 
-
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -37,7 +36,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
   return (
     <form action={action} className="space-y-8">
       <div className="space-y-2">
-        <Label htmlFor="name">Name</Label>
+        <Label htmlFor="name">Nom</Label>
         <Input
           type="text"
           id="name"
@@ -64,7 +63,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
         {error.type && <div className="text-destructive">{error.type}</div>}
       </div>
       <div className="space-y-2">
-        <Label htmlFor="brand">Brand</Label>
+        <Label htmlFor="brand">Marque</Label>
         <Input
           type="text"
           id="brand"
@@ -75,7 +74,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
         {error.brand && <div className="text-destructive">{error.brand}</div>}
       </div>
       <div className="space-y-2">
-      <Label htmlFor="category">Category</Label>
+      <Label htmlFor="category">Catégorie</Label>
       <Select name="category" required defaultValue={product?.category || ""}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="--" />
@@ -93,7 +92,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
         )}
       </div>
       <div className="space-y-2">
-        <Label htmlFor="color">Color</Label>
+        <Label htmlFor="color">Couleur</Label>
         <Select name="color" required defaultValue={product?.color || ""}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="--" />
@@ -122,7 +121,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
         {error.dimensions && <div className="text-destructive">{error.dimensions}</div>}
       </div>
       <div className="space-y-2">
-        <Label htmlFor="price">Price</Label>
+        <Label htmlFor="price">Prix</Label>
         <Input
           type="number"
           id="price"
@@ -163,7 +162,7 @@ function SubmitButton() {
 
   return (
     <Button type="submit" disabled={pending}>
-      {pending ? "Saving..." : "Save"}
+      {pending ? "Enregistrement..." : "Enregistrer"}
     </Button>
   )
 }

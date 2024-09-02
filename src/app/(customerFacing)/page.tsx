@@ -65,23 +65,23 @@ export default function HomePage() {
       <HeroSection/>
       <div className="container space-y-12 my-12 pb-10">
         <ProductGridSection
-          title="Popular Glasses"
+          title="Lunettes Populaires"
           productsFetcher={getMostPopularGlasses}
           direction="glasses"
         />
-        <ProductGridSection title="Newest Glasses" productsFetcher={getNewestGlasses} direction="glasses"/>
+        <ProductGridSection title="Nouvelles Lunettes" productsFetcher={getNewestGlasses} direction="glasses"/>
         <ProductGridSection
-          title="Popular Watches"
+          title="Montres Populaires"
           productsFetcher={getMostPopularWatches}
           direction="watches"
         />
-        <ProductGridSection title="Newest Watches" productsFetcher={getNewestWatches} direction="watches"/>
+        <ProductGridSection title="Nouvelles Montres" productsFetcher={getNewestWatches} direction="watches"/>
         <ProductGridSection
-          title="Popular Accessories"
+          title="Accessoires Populaires"
           productsFetcher={getMostPopularAccessories}
           direction="accessories"
         />
-        <ProductGridSection title="Newest Accessories" productsFetcher={getNewstAccessories} direction="accessories"/>
+        <ProductGridSection title="Nouveaux Accessoires" productsFetcher={getNewstAccessories} direction="accessories"/>
       </div>
     </main>
   )
@@ -118,7 +118,7 @@ function ProductGridSection({
         <h2 className="text-3xl font-bold text-primary">{title}</h2>
         <Button variant="outline" className="text-primary" asChild>
           <Link href={`/${direction}`} className="space-x-2">
-            <span>View All</span>
+            <span>Voir Tout</span>
             <ArrowRight className="size-4" />
           </Link>
         </Button>

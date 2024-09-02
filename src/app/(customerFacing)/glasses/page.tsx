@@ -50,7 +50,7 @@ async function GlassesPageSuspense() {
   }, [])
 
   return (
-        <FilterList products={products} images={images} brands={brands} direction="Glasses" />
+        <FilterList products={products} images={images} brands={brands} direction="Lunettes" />
   )
 }
 

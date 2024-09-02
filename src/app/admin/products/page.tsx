@@ -14,9 +14,9 @@ export default function AdminProductPage(){
     return(
         <>
             <div className="flex justify-between gap-4">
-                <PageHeader>Products</PageHeader>
+                <PageHeader>Produits</PageHeader>
                 <Button asChild> 
-                    <Link href="/admin/products/new">New Product</Link>
+                    <Link href="/admin/products/new">Nouveau produit</Link>
                 </Button>
             </div>
             <ProductsTable />
@@ -50,12 +50,12 @@ async function ProductsTable() {
             <TableHead className="w-0">
               <span className="sr-only">Available For Purchase</span>
             </TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Price</TableHead>
+            <TableHead>Nom</TableHead>
+            <TableHead>Prix</TableHead>
             <TableHead>Type</TableHead>
-            <TableHead>Brand</TableHead>
-            <TableHead>Category</TableHead>
-            <TableHead>Orders</TableHead>
+            <TableHead>Marque</TableHead>
+            <TableHead>Categorie</TableHead>
+            <TableHead>Commandes</TableHead>
             <TableHead className="w-0">
               <span className="sr-only">Actions</span>
             </TableHead>

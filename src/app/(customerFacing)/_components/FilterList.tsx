@@ -6,9 +6,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Categories, Colors } from "@/lib/enums";
 
-
-//CORRECT FETCHING ALL THE IMAGES AT ONCE, USE PAGINATION CORRECTLY !! OR YOU'LL PAY MORE
-
 export type productType = {
   id: string;
   name: string;
@@ -100,16 +97,16 @@ export function FilterList({ products, images, brands, direction }: { products: 
         } transition-transform duration-300 md:translate-x-0`}
       >
         <div className="flex h-14 items-center justify-between border-b px-4 md:hidden">
-          <h2 className="text-lg font-semibold">Filters</h2>
+          <h2 className="text-lg font-semibold">Filtres</h2>
           <Button size="icon" variant="ghost" onClick={() => setIsFilterOpen(false)}>
             <XIcon className="h-6 w-6" />
-            <span className="sr-only">Close</span>
+            <span className="sr-only">Fermer</span>
           </Button>
         </div>
         <div className="px-4 py-6 md:px-0">
           <Accordion type="single" collapsible>
             <AccordionItem value="category">
-              <AccordionTrigger className="text-base">Category</AccordionTrigger>
+              <AccordionTrigger className="text-base">Catégorie</AccordionTrigger>
               <AccordionContent>
                 <div className="grid gap-2">
                   {categoryOptions.map((category) => (
@@ -127,7 +124,7 @@ export function FilterList({ products, images, brands, direction }: { products: 
           </Accordion>
           <Accordion type="single" collapsible>
             <AccordionItem value="brand">
-              <AccordionTrigger className="text-base">Brand</AccordionTrigger>
+              <AccordionTrigger className="text-base">Marque</AccordionTrigger>
               <AccordionContent>
                 <div className="grid gap-2">
                   {brands.map((brand) => (
@@ -145,7 +142,7 @@ export function FilterList({ products, images, brands, direction }: { products: 
           </Accordion>
           <Accordion type="single" collapsible>
             <AccordionItem value="color">
-              <AccordionTrigger className="text-base">Color</AccordionTrigger>
+              <AccordionTrigger className="text-base">Couleur</AccordionTrigger>
               <AccordionContent>
                 <div className="grid gap-2">
                   {colorOptions.map((color) => (
@@ -168,7 +165,7 @@ export function FilterList({ products, images, brands, direction }: { products: 
             <h1 className="text-lg font-semibold">{direction}</h1>
           <Button size="sm" variant="default" onClick={() => setIsFilterOpen(true)}>
             <FilterIcon className="h-6 w-6" />
-            <span className="sr-only">Open Filters</span>
+            <span className="sr-only">Ouvrir les filtres</span>
           </Button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -185,7 +182,7 @@ export function FilterList({ products, images, brands, direction }: { products: 
             &lt;
           </Button>
           <span>
-            Page {currentPage} of {totalPages}
+            Page {currentPage} sur {totalPages}
           </span>
           <Button
             onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}

@@ -7,7 +7,7 @@ export async function SpecificOrderComponent({id} : {id:string}) {
     const orderDetails = await getSpecificOrderInfos(id);
   
     if (!orderDetails) {
-      return <div>The order does not exist</div>;
+      return <div>La commande n'existe pas</div>;
     }
   
     const { order, product, user } = orderDetails;
@@ -16,12 +16,12 @@ export async function SpecificOrderComponent({id} : {id:string}) {
       <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <div>
-            <h2 className="text-2xl font-bold mb-4">User Information</h2>
+            <h2 className="text-2xl font-bold mb-4">Informations Utilisateur</h2>
             <div className="grid grid-cols-1 gap-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-                    First Name
+                    Prénom
                   </label>
                   <input
                     disabled={true}
@@ -33,7 +33,7 @@ export async function SpecificOrderComponent({id} : {id:string}) {
                 </div>
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
-                    Last Name
+                    Nom
                   </label>
                   <input
                     disabled={true}
@@ -58,7 +58,7 @@ export async function SpecificOrderComponent({id} : {id:string}) {
               </div>
               <div>
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                  Phone Number
+                  Numéro de Téléphone
                 </label>
                 <input
                   disabled={true}
@@ -70,7 +70,7 @@ export async function SpecificOrderComponent({id} : {id:string}) {
               </div>
               <div>
                 <label htmlFor="wilaya" className="block text-sm font-medium text-gray-700">
-                  Wilaya (region)
+                  Wilaya (région)
                 </label>
                 <input
                   disabled={true}
@@ -82,7 +82,7 @@ export async function SpecificOrderComponent({id} : {id:string}) {
               </div>
               <div>
                 <label htmlFor="address" className="block text-sm font-medium text-gray-700">
-                  Address
+                  Adresse
                 </label>
                 <textarea
                   disabled={true}
@@ -95,12 +95,12 @@ export async function SpecificOrderComponent({id} : {id:string}) {
             </div>
           </div>
           <div>
-            <h2 className="text-2xl font-bold mb-4">Order Details</h2>
+            <h2 className="text-2xl font-bold mb-4">Détails de la Commande</h2>
             <div className="grid grid-cols-1 gap-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="productName" className="block text-sm font-medium text-gray-700">
-                    Product Name
+                    Nom du Produit
                   </label>
                   <input
                     disabled={true}
@@ -112,7 +112,7 @@ export async function SpecificOrderComponent({id} : {id:string}) {
                 </div>
                 <div>
                   <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
-                    Quantity
+                    Quantité
                   </label>
                   <input
                     disabled={true}
@@ -126,7 +126,7 @@ export async function SpecificOrderComponent({id} : {id:string}) {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="totalPrice" className="block text-sm font-medium text-gray-700">
-                    Total Price
+                    Prix Total
                   </label>
                   <input  
                     disabled={true}
@@ -138,7 +138,7 @@ export async function SpecificOrderComponent({id} : {id:string}) {
                 </div>
                 <div>
                   <label htmlFor="orderDate" className="block text-sm font-medium text-gray-700">
-                    Date of Order
+                    Date de la Commande
                   </label>
                   <input
                     disabled={true}
@@ -158,5 +158,4 @@ export async function SpecificOrderComponent({id} : {id:string}) {
         </div>
       </div>
     );
-  }
-  
+}

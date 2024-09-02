@@ -46,7 +46,7 @@ export default function ProductInfos({
             <CarouselItem key={image.id}>
               <Image
                 src={image.path}
-                alt="Product Image"
+                alt="Image du produit"
                 height={500}
                 width={400}
                 className="aspect-[4/3] object-cover rounded-lg"
@@ -66,7 +66,7 @@ export default function ProductInfos({
         <div className="grid gap-2">
           <div className="flex items-center gap-2">
             <span className="text-2xl font-bold text-primary">{formatCurrency(price)}</span>
-            <Badge variant="outline" className="text-primary">In Stock</Badge>
+            <Badge variant="outline" className="text-primary">En Stock</Badge>
           </div>
           <p className="text-muted-text-base">
             {description}
@@ -74,30 +74,30 @@ export default function ProductInfos({
         </div>
         <div className="grid gap-2">
           <div className="flex items-center gap-2">
-            <span className="text-primary font-medium ">Type:</span>
+            <span className="text-primary font-medium ">Type :</span>
             <span className="text-muted-text-base">{type}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-primary font-medium">Brand:</span>
+            <span className="text-primary font-medium">Marque :</span>
             <span className="text-muted-text-base">{brand}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-primary font-medium">Category:</span>
+            <span className="text-primary font-medium">Catégorie :</span>
             <span className="text-muted-text-base">{category}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-primary font-medium">Color:</span>
+            <span className="text-primary font-medium">Couleur :</span>
             <span className="text-muted-text-base">{color}</span>
           </div>
           {dimensions && 
             <div className="flex items-center gap-2">
-              <span className="text-primary font-medium">Dimensions:</span>
+              <span className="text-primary font-medium">Dimensions :</span>
               <span className="text-muted-text-base">{dimensions}</span>
             </div>}
         </div>
         <div className="flex gap-2 w-full justify-center md:justify-start">
         <Dialog>
-            <DialogTrigger asChild><Button size="lg" >Order Now</Button></DialogTrigger>
+            <DialogTrigger asChild><Button size="lg" >Commander Maintenant</Button></DialogTrigger>
             <DialogContent className="w-10/12 h-5/6 sm:h-auto sm:max-w-md rounded-md overflow-y-scroll sm:overflow-y-clip" onOpenAutoFocus={e=>e.preventDefault()}>
                 <DialogHeader>
                     <DialogDescription >

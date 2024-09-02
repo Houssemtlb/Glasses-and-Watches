@@ -96,7 +96,7 @@ export function ProductCard({
           <div className="text-2xl font-bold text-primary">{formatCurrency(price)}</div>
           <Button size="sm">
             <Link href={type==="Lunettes" ? `/glasses/${id}` : `/watches/${id}`}>
-                Buy now
+                Commander
             </Link>
           </Button>
         </div>

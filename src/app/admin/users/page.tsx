@@ -14,14 +14,12 @@ export default function AdminUsersPage(){
     return(
         <>
             <div className="flex justify-between gap-4">
-                <PageHeader>Customers</PageHeader>
+                <PageHeader>Clients</PageHeader>
             </div>
             <UsersTable />
         </>
     ) 
 }
-
-
 
 async function UsersTable() {
     const users = await db.user.findMany({
@@ -38,19 +36,19 @@ async function UsersTable() {
       orderBy: { createdAt: "desc" },
     })
   
-    if (users.length === 0) return <p>No users found</p>
+    if (users.length === 0) return <p>Aucun utilisateur trouvé</p>
   
     return (
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>First Name</TableHead>
-            <TableHead>Last Name</TableHead>
+            <TableHead>Prénom</TableHead>
+            <TableHead>Nom</TableHead>
             <TableHead>Email</TableHead>
-            <TableHead>Phone</TableHead>
-            <TableHead>Wilaaya</TableHead>
-            <TableHead>Address</TableHead>
-            <TableHead>Orders</TableHead>
+            <TableHead>Téléphone</TableHead>
+            <TableHead>Wilaya</TableHead>
+            <TableHead>Adresse</TableHead>
+            <TableHead>Commandes</TableHead>
             <TableHead className="w-0">
               <span className="sr-only">Actions</span>
             </TableHead>

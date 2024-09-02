@@ -26,7 +26,7 @@ export function LandingCarousel({images} : {images: carouselType[]}) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.5)] to-[rgba(0,0,0,0.1)]" />
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 md:px-8 lg:px-12 space-y-4">
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">Discover our collection.</h2>
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">Découvrez notre collection.</h2>
                     </div>
                 </div>
             </CarouselItem>

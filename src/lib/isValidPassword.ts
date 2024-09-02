@@ -10,6 +10,6 @@ export async function isValidPassword(
       "SHA-512",
       new TextEncoder().encode(password)
     )
-  
+    console.log("Array buffer:", Buffer.from(arrayBuffer).toString("base64"))
     return Buffer.from(arrayBuffer).toString("base64")
   }

@@ -13,7 +13,7 @@ export default function AdminOrdersPage(){
     return(
         <>
             <div className="flex justify-between gap-4">
-                <PageHeader>Orders</PageHeader>
+                <PageHeader>Commandes</PageHeader>
             </div>
             <OrdersTable />
         </>
@@ -38,11 +38,11 @@ async function OrdersTable() {
         <Table>
             <TableHeader>
                 <TableRow>
-                <TableHead>Order ID</TableHead>
-                <TableHead>Total Price</TableHead>
-                <TableHead>Quantity</TableHead>
+                <TableHead>ID Commande</TableHead>
+                <TableHead>Prix total</TableHead>
+                <TableHead>Quantite</TableHead>
                 <TableHead>Date</TableHead>
-                <TableHead>Valid</TableHead>
+                <TableHead>Validation</TableHead>
                 <TableHead className="w-0">
                     <span className="sr-only">Actions</span>
                 </TableHead>

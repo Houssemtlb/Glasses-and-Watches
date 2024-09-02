@@ -24,7 +24,7 @@ export function DeleteDropdownItem({
           })
         }}
       >
-        Delete
+        Supprimer
       </DropdownMenuItem>
     )
   }
