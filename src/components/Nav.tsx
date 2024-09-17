@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { ComponentProps, useEffect, useState } from "react";
+import { ComponentProps, useEffect, useState } from "react";
 
 export function Nav({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,21 +52,19 @@ export function Nav({ children }: { children: React.ReactNode }) {
           isOpen ? "py-2" : "hidden mr-12",
           "md:block"
         )}
-      >
-        {React.Children.map(children, (child) =>
-          React.cloneElement(child as React.ReactElement, { setIsOpen })
-        )}
+        onClick={() => setIsOpen(false)}>
+        {children}
       </div>
     </nav>
   );
 }
 
-export function NavLink(props: Omit<ComponentProps<typeof Link>, "className"> & {setIsOpen: (isOpen: boolean) => void}) {
+export function NavLink(props: Omit<ComponentProps<typeof Link>, "className">) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
-    props.setIsOpen(false); // Close the menu when a link is clicked
+    setIsOpen(false); // Close the menu when a link is clicked
   };
 
   return (
