@@ -19,7 +19,6 @@ const diapoSchema = z.object({
 
 export async function editDiapo(prevState: unknown, formData: FormData){
     const images = formData.getAll('images');
-    console.log(images);
 
     const result = diapoSchema.safeParse({
         images,
@@ -36,7 +35,6 @@ export async function editDiapo(prevState: unknown, formData: FormData){
     try{
         const [files] = await bucket.getFiles({ prefix: "diapos/" });
         await Promise.all(files.map(file => file.delete()));
-        console.log("Deleted all images in diapos folder");
     }catch(error){
         console.error("Failed to delete images:", error);
     }
